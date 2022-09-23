@@ -1,0 +1,14 @@
+resources: 
+- clowder-system.yaml
+- hac-fe.yaml
+- hac.yaml
+- hac-boot.yaml
+
+namespace: openshift-gitops
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+patchesStrategicMerge:
+  - repo-overlay.yaml  
+
+
+
