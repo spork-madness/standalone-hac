@@ -8,7 +8,7 @@ if [ "$(oc auth can-i '*' '*' --all-namespaces)" != "yes" ]; then
   exit 1
 fi
 
-QUAY_IO_KUBESECRET=$ROOT/hack/nocommit/my-secret.yaml
+QUAY_IO_KUBESECRET=$ROOT/hack/nocommit/my-secret.yml
 
 if [ -n "$QUAY_IO_KUBESECRET" ]; then
     TMP_QUAY=$(mktemp)
