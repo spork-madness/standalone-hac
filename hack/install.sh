@@ -8,6 +8,7 @@ if [ "$(oc auth can-i '*' '*' --all-namespaces)" != "yes" ]; then
   exit 1
 fi
 
+QUAY_IO_KUBESECRET=$ROOT/hack/nocommit/my-secret.yaml
 
 if [ -n "$QUAY_IO_KUBESECRET" ]; then
     TMP_QUAY=$(mktemp)
@@ -22,5 +23,9 @@ if [ -n "$QUAY_IO_KUBESECRET" ]; then
     kubectl create -f $TMP_QUAY --namespace=boot
     rm $TMP_QUAY
 fi
-
+ 
 kubectl apply -f $ROOT/argo-cd-apps/app-of-apps/all-applications.yaml
+
+kubectl create secret docker-registry redhat-appstudio-staginguser-pull-secret --from-file=.dockerconfigjson="$ROOT/hack/nocommit/quay-io-auth.json" --dry-run=client -o yaml | \
+kubectl apply -f - -n application-service
+ 
