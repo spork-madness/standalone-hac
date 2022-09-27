@@ -9,8 +9,12 @@ if [ -d $CLOWDER ]; then
   (cd $CLOWDER; ./build/kube_setup.sh)
 else
   echo "No clowder found in $CLOWDER"
+  echo "git clone https://github.com/jduimovich/clowder.git" 
+  echo "into the parent directory ../clowder"
+  echo "and re-reun this script"  
   exit 1
 fi
+
 
 if [ "$(oc auth can-i '*' '*' --all-namespaces)" != "yes" ]; then
   echo
@@ -45,6 +49,9 @@ kubectl apply -f - -n application-service
 if [ -d $PROXY ]; then
   (cd $PROXY; bash run-crc)
 else
-  echo "No proxy found in $PROXY"
-  exit 1
+  echo "No proxy found in $PROXY" 
+  echo "git clone  https://github.com/jduimovich/crc-k8s-proxy.git" 
+  echo "into the parent directory ../crc-k8s-proxy"
+  echo "and re-reun this script" 
+  exit 1 
 fi
