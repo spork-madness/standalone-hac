@@ -3,6 +3,7 @@ resources:
 - hac-fe.yaml
 - hac.yaml
 - hac-boot.yaml
+- default-appstudio-namespace.yaml
 
 namespace: openshift-gitops
 apiVersion: kustomize.config.k8s.io/v1beta1
