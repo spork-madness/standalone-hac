@@ -55,3 +55,6 @@ else
   echo "and re-reun this script" 
   exit 1 
 fi
+
+# switch to the correct single namespace 
+oc project aaaa-studio
