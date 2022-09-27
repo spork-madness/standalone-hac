@@ -35,6 +35,7 @@ if [ -n "$QUAY_IO_KUBESECRET" ]; then
     rm $TMP_QUAY
 fi
  
+kubectl apply -f $ROOT/hack/default-appstudio-namespace.yaml
 kubectl apply -f $ROOT/argo-cd-apps/app-of-apps/all-applications.yaml
 
 kubectl create secret docker-registry redhat-appstudio-staginguser-pull-secret --from-file=.dockerconfigjson="$ROOT/hack/nocommit/quay-io-auth.json" --dry-run=client -o yaml | \
