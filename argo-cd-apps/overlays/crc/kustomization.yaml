@@ -1,5 +1,7 @@
 resources:
 - ../../base
+- default-appstudio-namespace.yaml
+
 
 namespace: openshift-gitops
 
