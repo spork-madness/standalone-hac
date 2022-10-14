@@ -38,16 +38,27 @@ if [ -n "$QUAY_IO_KUBESECRET" ]; then
     kubectl create -f $TMP_QUAY --namespace=boot
     rm $TMP_QUAY
 fi
- 
+
+# note this is a hack to ensure the namespace appears first in the list
+
 kubectl apply -f $ROOT/hack/default-appstudio-namespace.yaml
-kubectl apply -f $ROOT/argo-cd-apps/app-of-apps/all-applications.yaml
+ 
+REPO_PATH=argo-cd-apps/overlays/crc 
+REPO=$(git ls-remote --get-url $MY_GIT_FORK_REMOTE | sed 's|^git@github.com:|https://github.com/|')
+REVISION=$(git rev-parse --abbrev-ref HEAD)
+
+#localize it 
+yq '.spec.source.path="'$REPO_PATH'"' $ROOT/argo-cd-apps/app-of-apps/all-applications.yaml | \
+      yq '.spec.source.repoURL="'$REPO'"' | \
+      yq '.spec.source.targetRevision="'$REVISION'"' | \
+      kubectl apply -f -
 
 kubectl create secret docker-registry redhat-appstudio-staginguser-pull-secret --from-file=.dockerconfigjson="$ROOT/hack/nocommit/quay-io-auth.json" --dry-run=client -o yaml | \
-kubectl apply -f - -n application-service
+kubectl apply -f - -n aaaa-studio
  
  
 if [ -d $PROXY ]; then
-  (cd $PROXY; bash run-crc)
+  (cd $PROXY; bash run-util kcp)
 else
   echo "No proxy found in $PROXY" 
   echo "git clone  https://github.com/jduimovich/crc-k8s-proxy.git" 
