@@ -58,7 +58,7 @@ kubectl apply -f - -n aaaa-studio
  
  
 if [ -d $PROXY ]; then
-  (cd $PROXY; bash run-util kcp)
+  (cd $PROXY; bash run-util crc)
 else
   echo "No proxy found in $PROXY" 
   echo "git clone  https://github.com/jduimovich/crc-k8s-proxy.git" 
