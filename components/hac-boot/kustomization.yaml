@@ -2,8 +2,8 @@ resources:
 - key-cloak-auth.yml  
 - environment.yaml 
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/bundle.yaml
-- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-nav.yaml 
-- hac-dev.yaml
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-nav.yaml
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-dev.yaml 
 - hac.yaml
 - chrome.yml  
 - env-boot.yaml
