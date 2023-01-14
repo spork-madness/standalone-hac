@@ -4,7 +4,7 @@ resources:
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/bundle.yaml
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-nav.yaml
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-dev.yaml 
-- hac.yaml
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac.yaml 
 - chrome.yml  
 - env-boot.yaml
 
