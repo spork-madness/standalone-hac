@@ -1,6 +1,6 @@
 resources:
 - environment.yaml 
-- bundle.yaml
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/bundle.yaml
 - hac_nav.yaml
 - hac-dev.yaml
 - hac.yaml
