@@ -1,0 +1,21 @@
+resources:
+- environment.yaml 
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/bundle.yaml
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-nav.yaml
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-dev.yaml
+- https://github.com/RedHatInsights/frontend-operator/blob/main/examples/hac.yaml
+- https://github.com/RedHatInsights/frontend-operator/blob/main/examples/chrome.yaml
+- https://github.com/RedHatInsights/frontend-operator/blob/main/examples/clowdenvironment.yaml
+- key-cloak-auth.yml  
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+# Skip applying the Tekton operands while the Tekton operator is being installed.
+# See more information about this option, here:
+# https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#skip-dry-run-for-new-custom-resources-types
+commonAnnotations:
+  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
