@@ -1,12 +1,12 @@
 resources:
-- environment.yaml 
+- key-cloak-auth.yml  
+- environment.yaml  
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/bundle.yaml
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-nav.yaml
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-dev.yaml
-- https://github.com/RedHatInsights/frontend-operator/blob/main/examples/hac.yaml
-- https://github.com/RedHatInsights/frontend-operator/blob/main/examples/chrome.yaml
-- https://github.com/RedHatInsights/frontend-operator/blob/main/examples/clowdenvironment.yaml
-- key-cloak-auth.yml  
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac.yaml 
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/chrome.yaml 
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/clowdenvironment.yaml 
 
 generatorOptions:
   disableNameSuffixHash: true
