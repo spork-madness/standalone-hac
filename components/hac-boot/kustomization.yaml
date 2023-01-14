@@ -5,7 +5,7 @@ resources:
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-nav.yaml
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-dev.yaml 
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac.yaml 
-- chrome.yml  
+- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/chrome.yaml 
 - env-boot.yaml
 
 generatorOptions:
