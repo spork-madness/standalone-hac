@@ -9,7 +9,7 @@ if [ -d $CLOWDER ]; then
   (cd $CLOWDER; ./build/kube_setup.sh)
 else
   echo "No clowder found in $CLOWDER"
-  echo "git clone https://github.com/jduimovich/clowder.git" 
+  echo "git clone https://github.com/RedHatInsights/clowder.git" 
   echo "into the parent directory ../clowder"
   echo "and re-reun this script"  
   exit 1
