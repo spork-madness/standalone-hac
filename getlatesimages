@@ -1,0 +1,39 @@
+
+REGISTRY=quay.io
+
+function newestImageTag () { 
+  REPO=$1
+  LAST_LINK= 
+  LINK="/v2/$REPO/tags/list?n=50"
+  COUNT=0
+  echo -n $REPO " "
+  while [[ $LINK != null ]]
+  do
+    LAST_LINK=$LINK
+    URL="https://$REGISTRY$LINK" 
+    NEXTLINK=$(curl -X HEAD -I -s "$URL" | grep "Link:") 
+    LINK=$(echo $NEXTLINK |  sed -e 's/.*<\(.*\)>.*/\1/')  
+    if [[ $LINK == "" ]]
+    then
+      echo 
+      LINK=$LAST_LINK
+      break
+    fi
+    echo -n "$COUNT "
+    let COUNT++
+  done 
+
+  URL="https://$REGISTRY$LINK"   
+  LAST=$(curl -s "$URL") 
+  LEN=$(echo $LAST | jq ".tags" | jq length)
+  let LEN-- 
+  TAG=$(echo $LAST | jq -r ".tags[$LEN]")
+  printf "\nhttps://%s/%s:%s\n\n" $REGISTRY $REPO $TAG
+}
+
+ 
+newestImageTag cloudservices/clowder  
+newestImageTag cloudservices/hac-core-frontend  
+newestImageTag cloudservices/hac-dev-frontend  
+newestImageTag cloudservices/hac-infra-frontend  
+newestImageTag cloudservices/frontend-operator    
