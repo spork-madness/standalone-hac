@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: non-empty-app
 data:
-  random: true
+  random: "true"
