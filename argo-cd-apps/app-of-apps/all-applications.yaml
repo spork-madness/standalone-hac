@@ -5,24 +5,18 @@ metadata:
   namespace: openshift-gitops
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-
 spec:
   project: default
-
   source:
     path: argo-cd-apps/overlays/crc
     repoURL: https://github.com/jduimovich/standalone-hac.git
-    targetRevision: main
-
+    targetRevision: b1
   destination:
     namespace: openshift-gitops
     server: https://kubernetes.default.svc
-
   syncPolicy:
-
-    automated: 
+    automated:
       prune: true
       selfHeal: true
-
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
