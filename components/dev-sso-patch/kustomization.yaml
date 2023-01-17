@@ -1,9 +1,7 @@
 resources: 
-- placeholder.yaml
-
-#
-# - keycloak-svc.yaml  
-# - keycloak-redhat-external.yaml
+- placeholder.yaml 
+- keycloak-svc.yaml  
+- keycloak-redhat-external.yaml
 
 generatorOptions:
   disableNameSuffixHash: true

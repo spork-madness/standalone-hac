@@ -23,7 +23,7 @@ spec:
         directAccessGrantsEnabled: true
     displayName: Redhat External for HAC
     enabled: true
-    id: rh-sso
+    id: hac-sso
     loginTheme: keycloak
     realm: redhat-external
     users:
