@@ -28,7 +28,7 @@ function newestImageTag () {
   LEN=$(echo $LAST | jq ".tags" | jq length)
   let LEN-- 
   TAG=$(echo $LAST | jq -r ".tags[$LEN]")
-  printf "\nhttps://%s/%s:%s\n\n" $REGISTRY $REPO $TAG
+  printf "\n%s/%s:%s\n\n" $REGISTRY $REPO $TAG
 }
 
  
