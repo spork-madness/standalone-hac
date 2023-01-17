@@ -1,0 +1,8 @@
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"  
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"/..
+
+# update the targetRevision for the Argo Apps to match this branch
+REVISION=$(git rev-parse --abbrev-ref HEAD)
+yq -i '.spec.source.targetRevision="'$REVISION'"'  $ROOT/argo-cd-apps/app-of-apps/all-applications.yaml
+yq -i '.spec.source.targetRevision="'$REVISION'"'  $ROOT/argo-cd-apps/base/repo-overlay.yaml
+    
