@@ -12,5 +12,5 @@ spec:
   frontend:
     paths:
       - /api/plugins/hac-infra
-  image: quay.io/cloudservices/hac-infra-frontend:6923bcf
+  image: quay.io/cloudservices/hac-infra-frontend:feab95f
   title: hac-infra
