@@ -41,3 +41,14 @@ spec:
   source:
     repoURL: https://github.com/jduimovich/standalone-hac.git
     targetRevision: b1-merge
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev-sso-patch
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  source:
+    repoURL: https://github.com/jduimovich/standalone-hac.git
+    targetRevision: b1-merge
