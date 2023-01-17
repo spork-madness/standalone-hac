@@ -1,0 +1,19 @@
+INTERVAL=10
+while :; do
+  STATE=$(kubectl get apps -n openshift-gitops --no-headers)
+  NOT_DONE=$(echo "$STATE" | grep -v "Synced[[:blank:]]*Healthy" || true) 
+  ALL_BUT_SPI=$(echo "$NOT_DONE" | grep -v  "spi" || true)
+  SPI_ONLY=$(echo "$NOT_DONE" | grep  "spi" || true) 
+  echo "Everything except the SPI ones:"
+  echo "$ALL_BUT_SPI"
+  echo "Only the SPI ones:"
+  echo "$SPI_ONLY" 
+  if [ -z "$ALL_BUT_SPI" ]; then
+     echo All Applications are synced and Healthy
+     break
+  else 
+     echo Waiting $INTERVAL seconds for application sync
+     sleep $INTERVAL
+     clear
+  fi
+done
