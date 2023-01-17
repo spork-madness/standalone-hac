@@ -1,0 +1,20 @@
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"  
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"/..
+
+
+function showImage() {
+    SPEC=$1
+    FILE=$2
+    IMG=$(yq "$SPEC " "$ROOT/$FILE")
+    echo " $IMG referenced in: $FILE"
+}
+
+showImage '.spec.image'  components/hac/hac-core.yaml
+showImage '.spec.image'  components/hac/hac-dev.yaml
+showImage '.spec.image'  components/hac/hac-infra.yaml   
+showImage '.spec.template.spec.containers[].image'  components/hac-fe-config/manager/manager.yaml
+
+FILE=components/clowder-system/deploy-processed.yml
+IMG=$(yq e '.items[] | select(.kind == "Deployment")' "$ROOT/$FILE" | yq '.spec.template.spec.containers[].image')
+echo " $IMG referenced in: $FILE"
+ 
