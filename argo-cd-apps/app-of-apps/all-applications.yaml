@@ -10,7 +10,7 @@ spec:
   source:
     path: argo-cd-apps/overlays/crc
     repoURL: https://github.com/jduimovich/standalone-hac.git
-    targetRevision: b1
+    targetRevision: b1-merge
   destination:
     namespace: openshift-gitops
     server: https://kubernetes.default.svc
