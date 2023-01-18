@@ -9,9 +9,9 @@ function showImage() {
     echo " $IMG referenced in: $FILE"
 }
 
-showImage '.spec.image'  components/hac/hac-core.yaml
-showImage '.spec.image'  components/hac/hac-dev.yaml
-showImage '.spec.image'  components/hac/hac-infra.yaml   
+showImage '.spec.image'  components/hac-boot/hac-core.yaml
+showImage '.spec.image'  components/hac-boot/hac-dev.yaml
+showImage '.spec.image'  components/hac-boot/hac-infra.yaml   
 showImage '.spec.template.spec.containers[].image'  components/hac-fe-config/manager/manager.yaml
 
 FILE=components/clowder-system/deploy-processed.yml
