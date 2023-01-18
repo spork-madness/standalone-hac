@@ -6,7 +6,7 @@ resources:
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-dev.yaml 
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac.yaml 
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/chrome.yaml 
-- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/clowdenvironment.yaml  
+#- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/clowdenvironment.yaml  
 
 generatorOptions:
   disableNameSuffixHash: true
