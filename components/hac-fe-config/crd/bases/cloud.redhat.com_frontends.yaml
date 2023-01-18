@@ -63,6 +63,8 @@ spec:
                 type: string
               deploymentRepo:
                 type: string
+              disabled:
+                type: boolean
               envName:
                 type: string
               frontend:
@@ -78,6 +80,8 @@ spec:
                 type: string
               module:
                 properties:
+                  config:
+                    x-kubernetes-preserve-unknown-fields: true
                   manifestLocation:
                     type: string
                   moduleID:
@@ -85,10 +89,18 @@ spec:
                   modules:
                     items:
                       properties:
+                        dependencies:
+                          items:
+                            type: string
+                          type: array
                         id:
                           type: string
                         module:
                           type: string
+                        optionalDependencies:
+                          items:
+                            type: string
+                          type: array
                         routes:
                           items:
                             properties:
@@ -152,9 +164,7 @@ spec:
                               properties:
                                 args:
                                   items:
-                                    items:
-                                      type: string
-                                    type: array
+                                    type: string
                                   type: array
                                 method:
                                   type: string
@@ -190,9 +200,7 @@ spec:
                         properties:
                           args:
                             items:
-                              items:
-                                type: string
-                              type: array
+                              type: string
                             type: array
                           method:
                             type: string
@@ -225,6 +233,11 @@ spec:
                 type: array
               service:
                 type: string
+              serviceMonitor:
+                properties:
+                  disabled:
+                    type: boolean
+                type: object
               title:
                 type: string
             required:
