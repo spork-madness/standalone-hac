@@ -1,7 +1,6 @@
 resources: 
 - clowder-system.yaml
-- hac-fe.yaml
-- hac.yaml
+- hac-fe.yaml 
 - hac-boot.yaml
 - dev-sso-patch.yaml
 
