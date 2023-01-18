@@ -8,7 +8,7 @@ spec:
       - v1
   assetsPrefix: api/plugins
   deploymentRepo: 'http://github.com/openshift/hac-infra'
-  envName: ephem-hac
+  envName: env-boot
   frontend:
     paths:
       - /api/plugins/hac-infra

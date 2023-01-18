@@ -7,7 +7,7 @@ spec:
     versions:
       - v1
   deploymentRepo: 'http://test'
-  envName: ephem-hac
+  envName: env-boot
   frontend:
     paths:
       - /apps/hac-core

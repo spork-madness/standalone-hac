@@ -2,7 +2,7 @@
 apiVersion: cloud.redhat.com/v1alpha1
 kind: FrontendEnvironment
 metadata:
-  name: env-boot 
+  name: env-boot
 spec:
 # CHANGE ME DEPENDING ON KEYCLOAK
 # infra-deployment keycloak on crc in dev-sso NS
