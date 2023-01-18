@@ -1,17 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hac
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  source:
-    repoURL: https://github.com/jduimovich/standalone-hac.git
-    targetRevision: main
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
   name: hac-fe
   finalizers:
     - resources-finalizer.argocd.argoproj.io
