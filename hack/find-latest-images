@@ -35,5 +35,5 @@ function newestImageTag () {
 newestImageTag cloudservices/clowder  
 newestImageTag cloudservices/hac-core-frontend  
 newestImageTag cloudservices/hac-dev-frontend  
-newestImageTag cloudservices/hac-infra-frontend  
+#newestImageTag cloudservices/hac-infra-frontend  
 newestImageTag cloudservices/frontend-operator    

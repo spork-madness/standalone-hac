@@ -11,7 +11,7 @@ function showImage() {
 
 showImage '.spec.image'  components/hac-boot/hac-core.yaml
 showImage '.spec.image'  components/hac-boot/hac-dev.yaml
-showImage '.spec.image'  components/hac-boot/hac-infra.yaml   
+#showImage '.spec.image'  components/hac-boot/hac-infra.yaml   
 showImage '.spec.template.spec.containers[].image'  components/hac-fe-config/manager/manager.yaml
 
 FILE=components/clowder-system/deploy-processed.yml
