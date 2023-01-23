@@ -3,8 +3,8 @@ resources:
 - environment.yaml 
 - hac-core.yaml
 - hac-dev.yaml 
-# - chrome.yaml  
-- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/chrome.yaml
+- chrome.yaml  
+# - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/chrome.yaml
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-nav.yaml
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/bundle.yaml
 
