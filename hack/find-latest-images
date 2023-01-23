@@ -1,39 +1,46 @@
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"  
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"/..
 
 REGISTRY=quay.io
 
-function newestImageTag () { 
-  REPO=$1
-  LAST_LINK= 
-  LINK="/v2/$REPO/tags/list?n=50"
-  COUNT=0
-  echo -n $REPO " "
-  while [[ $LINK != null ]]
-  do
-    LAST_LINK=$LINK
-    URL="https://$REGISTRY$LINK" 
-    NEXTLINK=$(curl -X HEAD -I -s "$URL" | grep "Link:") 
-    LINK=$(echo $NEXTLINK |  sed -e 's/.*<\(.*\)>.*/\1/')  
-    if [[ $LINK == "" ]]
-    then
-      echo 
-      LINK=$LAST_LINK
-      break
-    fi
-    echo -n "$COUNT "
-    let COUNT++
-  done 
+function newestImageTag() {
+    SPEC=$1
+    FILE=$2
+    IMG=$(yq "$SPEC " "$ROOT/$FILE")
+    BASE=$(echo $IMG | cut -d ":" -f 1)
+    CURRENT_TAG=$(echo $IMG | cut -d ":" -f 2) 
+    REPO=${BASE#"$REGISTRY/"} 
 
-  URL="https://$REGISTRY$LINK"   
-  LAST=$(curl -s "$URL") 
-  LEN=$(echo $LAST | jq ".tags" | jq length)
-  let LEN-- 
-  TAG=$(echo $LAST | jq -r ".tags[$LEN]")
-  printf "\n%s/%s:%s\n\n" $REGISTRY $REPO $TAG
-}
-
+    LAST_LINK= 
+    LINK="/v2/$REPO/tags/list?n=50"
+    COUNT=0 
+    while [[ $LINK != null ]]
+    do
+      LAST_LINK=$LINK 
+      NEXTLINK=$(curl -X HEAD -I -s "https://$REGISTRY$LINK"  | grep "Link:") 
+      LINK=$(echo $NEXTLINK |  sed -e 's/.*<\(.*\)>.*/\1/')  
+      if [[ $LINK == "" ]]
+      then 
+        LINK=$LAST_LINK
+        break
+      fi 
+      let COUNT++
+    done 
  
-newestImageTag cloudservices/clowder  
-newestImageTag cloudservices/hac-core-frontend  
-newestImageTag cloudservices/hac-dev-frontend  
-#newestImageTag cloudservices/hac-infra-frontend  
-newestImageTag cloudservices/frontend-operator    
+    LAST=$(curl -s "https://$REGISTRY$LINK" ) 
+    LEN=$(echo $LAST | jq ".tags" | jq length)
+    let LEN-- 
+    TAG=$(echo $LAST | jq -r ".tags[$LEN]")
+    if [ "$CURRENT_TAG" != "$TAG" ] 
+    then
+      printf "Update: %s/%s:%s  in file: %s (current is: %s) \n" $REGISTRY $REPO $TAG $FILE $CURRENT_TAG
+    else 
+      printf "OK: %s/%s:%s\n" $REGISTRY $REPO $TAG
+    fi 
+} 
+
+newestImageTag '.spec.image'  components/hac-boot/hac-core.yaml & 
+newestImageTag '.spec.image'  components/hac-boot/hac-dev.yaml  & 
+newestImageTag '.spec.image'  components/hac-boot/chrome.yaml  & 
+newestImageTag '.spec.template.spec.containers[].image'  components/hac-fe-config/manager/manager.yaml & 
+wait 

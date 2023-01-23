@@ -1,20 +1,26 @@
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"  
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"/..
+ 
 
-
+REGISTRY=quay.io/
 function showImage() {
     SPEC=$1
     FILE=$2
     IMG=$(yq "$SPEC " "$ROOT/$FILE")
-    echo " $IMG referenced in: $FILE"
+    BASE=$(echo $IMG | cut -d ":" -f 1)
+    TAG=$(echo $IMG | cut -d ":" -f 2) 
+    COMPONENT=${BASE#"$REGISTRY"} 
+    echo " $IMG referenced in: $FILE  $TAG $COMPONENT"  
 }
 
 showImage '.spec.image'  components/hac-boot/hac-core.yaml
-showImage '.spec.image'  components/hac-boot/hac-dev.yaml
-#showImage '.spec.image'  components/hac-boot/hac-infra.yaml   
+showImage '.spec.image'  components/hac-boot/hac-dev.yaml 
+showImage '.spec.image'  components/hac-boot/chrome.yaml 
 showImage '.spec.template.spec.containers[].image'  components/hac-fe-config/manager/manager.yaml
 
 FILE=components/clowder-system/deploy-processed.yml
 IMG=$(yq e '.items[] | select(.kind == "Deployment")' "$ROOT/$FILE" | yq '.spec.template.spec.containers[].image')
-echo " $IMG referenced in: $FILE"
+
+TAG=$(echo $IMG | cut -d ":" -f 2)
+echo " $IMG referenced in: $FILE  $TAG"
  
