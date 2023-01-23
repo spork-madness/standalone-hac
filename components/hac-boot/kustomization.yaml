@@ -6,7 +6,7 @@ resources:
 #- hac-infra.yaml
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-nav.yaml
 - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/bundle.yaml
-- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/chrome.yaml 
+- chrome.yaml 
 #- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/clowdenvironment.yaml  
 
 # Can replace with reference to these if you override the images
