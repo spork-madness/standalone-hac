@@ -15,3 +15,8 @@ spec:
       - /
       - /config/chrome
   image: quay.io/cloudservices/insights-chrome-frontend:4e0f158
+  module:
+    manifestLocation: "/apps/chrome/js/fed-mods.json"
+    config:
+      ssoUrl: https://keycloak-dev-sso.apps-crc.testing/auth/
+ 
