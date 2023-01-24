@@ -19,5 +19,5 @@ spec:
   module:
     manifestLocation: "/apps/chrome/js/fed-mods.json"
     config:
-      ssoUrl: https://keycloak-dev-sso.apps-crc.testing/auth/
+      SSO: https://keycloak-dev-sso.apps-crc.testing/auth/
  
