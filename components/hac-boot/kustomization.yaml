@@ -1,6 +1,6 @@
 resources:
 - key-cloak-auth.yml  
-# - environment.yaml 
+- environment.yaml 
 - hac-core.yaml
 - hac-dev.yaml 
 - chrome.yaml  
