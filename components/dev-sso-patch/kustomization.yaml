@@ -1,5 +1,4 @@
-resources: 
-- placeholder.yaml 
+resources:  
 - keycloak-svc.yaml  
 - keycloak-redhat-external.yaml
 
