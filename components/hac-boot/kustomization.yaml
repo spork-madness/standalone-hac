@@ -1,20 +1,10 @@
-resources:
-- key-cloak-auth.yml  
+resources: 
+- chrome.yaml   
 - environment.yaml 
 - hac-core.yaml
 - hac-dev.yaml 
-- chrome.yaml  
-# - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/chrome.yaml
-- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-nav.yaml
-#- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/bundle.yaml
-
-# Can replace with reference to these if you override the images
-# - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac.yaml 
-# - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/hac-dev.yaml 
-# - https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/chrome.yaml 
-
-# Unneeded  
-#- https://raw.githubusercontent.com/RedHatInsights/frontend-operator/main/examples/clowdenvironment.yaml  
+- hac-nav.yaml 
+  
 
 generatorOptions:
   disableNameSuffixHash: true
