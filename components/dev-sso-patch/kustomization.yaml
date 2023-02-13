@@ -1,6 +1,6 @@
 resources:  
 - keycloak-svc.yaml  
-- keycloak-redhat-external.yaml
+#- keycloak-redhat-external.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
