@@ -4999,7 +4999,7 @@ items:
               "watchStrimziResources": false,
               "perProviderMetrics": false,
               "reconciliationMetrics": false
-      , "images": {"Keycloak": "quay.io/keycloak/keycloak:15.0.2" }     }
+          }
       }
   kind: ConfigMap
   metadata:
