@@ -1,9 +1,0 @@
-apiVersion: route.openshift.io/v1
-kind: Route
-metadata:
-  name: base
-spec:
-  to:
-    kind: Service
-    name: keycloak-svc
-

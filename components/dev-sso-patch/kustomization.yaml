@@ -1,7 +1,5 @@
 resources:  
-- keycloak-svc.yaml  
-- baseroute.yaml  
-#- keycloak-redhat-external.yaml
+- keycloak-svc.yaml   
 
 generatorOptions:
   disableNameSuffixHash: true
