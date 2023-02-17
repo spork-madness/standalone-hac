@@ -8,7 +8,7 @@ spec:
 
   source:
     path: components/clowder-system
-    repoURL: https://github.com/jduimovich/standalone-hac.git
+    repoURL: REPLACED_BY_OVERLAY
 
   destination:
     namespace: clowder-system

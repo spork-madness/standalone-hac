@@ -8,7 +8,7 @@ spec:
 
   source:
     path: components/dev-sso-patch
-    repoURL: https://github.com/jduimovich/standalone-hac.git
+    repoURL: REPLACED_BY_OVERLAY
 
   destination:
     namespace: dev-sso

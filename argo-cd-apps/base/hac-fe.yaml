@@ -8,7 +8,7 @@ spec:
 
   source:
     path: components/hac-fe-config/default
-    repoURL: https://github.com/jduimovich/standalone-hac.git
+    repoURL: REPLACED_BY_OVERLAY
 
   destination:
     namespace: frontend-operator-system
