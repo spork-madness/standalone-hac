@@ -9,6 +9,8 @@ if [ "$(oc auth can-i '*' '*' --all-namespaces)" != "yes" ]; then
   exit 1
 fi
 
+# update for clowder to ignore minikube 
+export KUBECTL_CMD=kubectl
 $SCRIPTDIR/install_clowder.sh  
 $SCRIPTDIR/install_hac.sh  
 $SCRIPTDIR/install_proxy.sh  
