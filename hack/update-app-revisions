@@ -1,8 +1,21 @@
+#!/bin/bash  
+
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"  
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"/..
 
+REMOTE=$(git remote show origin -n | grep Fetch)
+REMOTE_ARR=($REMOTE)
+REMOTE=${REMOTE_ARR[2]} 
+
 # update the targetRevision for the Argo Apps to match this branch
 REVISION=$(git rev-parse --abbrev-ref HEAD)
+
+echo "Updating this repos gitops repo references to be:"
+echo "Rep: $REMOTE Revision: $REVISION"
+
+yq -i '.spec.source.repoURL="'$REMOTE'"'  $ROOT/argo-cd-apps/app-of-apps/all-applications.yaml
 yq -i '.spec.source.targetRevision="'$REVISION'"'  $ROOT/argo-cd-apps/app-of-apps/all-applications.yaml
+
+yq -i '.spec.source.repoURL="'$REMOTE'"'  $ROOT/argo-cd-apps/base/repo-overlay.yaml
 yq -i '.spec.source.targetRevision="'$REVISION'"'  $ROOT/argo-cd-apps/base/repo-overlay.yaml
     
