@@ -33,7 +33,7 @@ function newestImageTag() {
       let LEN-- 
       TAG=$(echo $LAST | jq -r ".tags[$LEN]")  
       [[ $TAG = pr* ]] || break
-      echo "Skipping PR images $TAG"
+      #echo "Skipping PR images $TAG"
     done 
 
     if [ "$CURRENT_TAG" != "$TAG" ] 
