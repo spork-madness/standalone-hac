@@ -6,7 +6,7 @@ REGISTRY=quay.io
 function newestImageTag() {
     SPEC=$1
     FILE=$2
-    IMG=$(yq "$SPEC " "$ROOT/$FILE")
+    IMG=$(yq "$SPEC" "$ROOT/$FILE")
     BASE=$(echo $IMG | cut -d ":" -f 1)
     CURRENT_TAG=$(echo $IMG | cut -d ":" -f 2) 
     REPO=${BASE#"$REGISTRY/"} 
@@ -29,11 +29,18 @@ function newestImageTag() {
  
     LAST=$(curl -s "https://$REGISTRY$LINK" ) 
     LEN=$(echo $LAST | jq ".tags" | jq length)
-    let LEN-- 
-    TAG=$(echo $LAST | jq -r ".tags[$LEN]")
+    while true; do
+      let LEN-- 
+      TAG=$(echo $LAST | jq -r ".tags[$LEN]")  
+      [[ $TAG = pr* ]] || break
+      echo "Skipping PR images $TAG"
+    done 
+
     if [ "$CURRENT_TAG" != "$TAG" ] 
     then
       printf "Update: %s/%s:%s  in file: %s (current is: %s) \n" $REGISTRY $REPO $TAG $FILE $CURRENT_TAG
+      FULL_IMAGE="$REGISTRY/$REPO:$TAG"
+      yq -i "$SPEC=\"$FULL_IMAGE\"" "$ROOT/$FILE"
     else 
       printf "OK: %s/%s:%s\n" $REGISTRY $REPO $TAG
     fi 
