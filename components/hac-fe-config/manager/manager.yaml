@@ -4,6 +4,10 @@ metadata:
   labels:
     control-plane: controller-manager
   name: system
+spec:
+  template:
+    spec:
+      containers: []
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -28,35 +32,35 @@ spec:
       securityContext:
         runAsNonRoot: true
       containers:
-      - command:
-        - /manager
-        args:
-        - --leader-elect
-        image: quay.io/cloudservices/frontend-operator:10182b2
-        name: manager
-        securityContext:
-          allowPrivilegeEscalation: false
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8081
-          initialDelaySeconds: 15
-          periodSeconds: 20
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 8081
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        resources:
-          limits:
-            cpu: 200m
-            memory: 900Mi
-          requests:
-            cpu: 100m
-            memory: 500Mi
-        ports:
-          - containerPort: 8080
-            name: metrics
+        - command:
+            - /manager
+          args:
+            - --leader-elect
+          image: quay.io/cloudservices/frontend-operator:7282f6f
+          name: manager
+          securityContext:
+            allowPrivilegeEscalation: false
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            limits:
+              cpu: 200m
+              memory: 900Mi
+            requests:
+              cpu: 100m
+              memory: 500Mi
+          ports:
+            - containerPort: 8080
+              name: metrics
       serviceAccountName: controller-manager
       terminationGracePeriodSeconds: 10
