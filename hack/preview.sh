@@ -32,19 +32,19 @@ fi
 # this will update the app of apps 
 $SCRIPTDIR/install_hac.sh  
 
-APPS=$(kubectl get apps -n openshift-gitops -o name) 
-REMOTE=$(git remote show origin -n | grep Fetch)
-REMOTE_ARR=($REMOTE)
-REMOTE=${REMOTE_ARR[2]} 
-# trigger refresh of apps
-for APP in $APPS; do
-  REPO=$(kubectl get  $APP -n openshift-gitops -o jsonpath="{.spec.source.repoURL}") 
-  if [ "$REPO" == "$REMOTE" ] 
-    then  
-        kubectl patch $APP -n openshift-gitops --type merge -p='{"metadata": {"annotations":{"argocd.argoproj.io/refresh": "hard"}}}' &
-    fi 
-done
-wait
+# APPS=$(kubectl get apps -n openshift-gitops -o name) 
+# REMOTE=$(git remote show origin -n | grep Fetch)
+# REMOTE_ARR=($REMOTE)
+# REMOTE=${REMOTE_ARR[2]} 
+# # trigger refresh of apps
+# for APP in $APPS; do
+#   REPO=$(kubectl get  $APP -n openshift-gitops -o jsonpath="{.spec.source.repoURL}") 
+#   if [ "$REPO" == "$REMOTE" ] 
+#     then  
+#         kubectl patch $APP -n openshift-gitops --type merge -p='{"metadata": {"annotations":{"argocd.argoproj.io/refresh": "hard"}}}' &
+#     fi 
+# done
+# wait
 
 
 
