@@ -60,8 +60,9 @@ while true; do
     NAME=$(echo $ITEM | jq -r ".metadata.name") 
     if [ "$REPO" == "$REMOTE" ] 
     then   
-        echo ME ME  ME $REPO $NAME
-        kubectl patch app $NAME -n openshift-gitops --type merge -p='{"metadata": {"annotations":{"argocd.argoproj.io/refresh": "hard"}}}' 
+        echo ME ME ME $REPO 
+        APP=$(kubectl get apps $NAME -n openshift-gitops -o name)
+        kubectl patch $APP -n openshift-gitops --type merge -p='{"metadata": {"annotations":{"argocd.argoproj.io/refresh": "hard"}}}' 
         # &
     else 
          echo SKIP $REPO $NAME
