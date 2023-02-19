@@ -44,9 +44,7 @@ $SCRIPTDIR/install_hac.sh
 #         kubectl patch $APP -n openshift-gitops --type merge -p='{"metadata": {"annotations":{"argocd.argoproj.io/refresh": "hard"}}}' &
 #     fi 
 # done
-# wait
-
-
+# wait 
 
 APPS=$(kubectl get apps -n openshift-gitops -o json) 
 LEN=$(echo $APPS | jq .items | jq length)
@@ -59,13 +57,9 @@ while true; do
     REPO=$(echo $ITEM | jq -r ".spec.source.repoURL")
     NAME=$(echo $ITEM | jq -r ".metadata.name") 
     if [ "$REPO" == "$REMOTE" ] 
-    then   
-        echo ME ME ME $REPO 
+    then    
         APP=$(kubectl get apps $NAME -n openshift-gitops -o name)
-        kubectl patch $APP -n openshift-gitops --type merge -p='{"metadata": {"annotations":{"argocd.argoproj.io/refresh": "hard"}}}' 
-        # &
-    else 
-         echo SKIP $REPO $NAME
+        kubectl patch $APP -n openshift-gitops --type merge -p='{"metadata": {"annotations":{"argocd.argoproj.io/refresh": "hard"}}}' & 
     fi  
     if [ "$LEN" == 0 ]; then 
         break
