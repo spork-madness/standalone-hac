@@ -45,4 +45,28 @@ for APP in $APPS; do
     fi 
 done
 wait
-   
+
+
+
+APPS=$(kubectl get apps -n openshift-gitops -o json) 
+LEN=$(echo $APPS | jq .items | jq length)
+REMOTE=$(git remote show origin -n | grep Fetch)
+REMOTE_ARR=($REMOTE)
+REMOTE=${REMOTE_ARR[2]}  
+while true; do
+    let LEN-- 
+    ITEM=$(echo $APPS | jq -r ".items[$LEN]")   
+    REPO=$(echo $ITEM | jq -r ".spec.source.repoURL")
+    NAME=$(echo $ITEM | jq -r ".metadata.name") 
+    if [ "$REPO" == "$REMOTE" ] 
+    then   
+        echo ME ME  ME $REPO $NAME
+        kubectl patch app $NAME-n openshift-gitops --type merge -p='{"metadata": {"annotations":{"argocd.argoproj.io/refresh": "hard"}}}' &
+    else 
+         echo SKIP $REPO $NAME
+    fi  
+    if [ "$LEN" == 0 ]; then 
+        break
+    fi
+done 
+  
