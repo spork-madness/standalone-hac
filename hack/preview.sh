@@ -61,7 +61,7 @@ while true; do
     if [ "$REPO" == "$REMOTE" ] 
     then   
         echo ME ME  ME $REPO $NAME
-        kubectl patch app $NAME-n openshift-gitops --type merge -p='{"metadata": {"annotations":{"argocd.argoproj.io/refresh": "hard"}}}' 
+        kubectl patch app $NAME -n openshift-gitops --type merge -p='{"metadata": {"annotations":{"argocd.argoproj.io/refresh": "hard"}}}' 
         # &
     else 
          echo SKIP $REPO $NAME
