@@ -24,6 +24,7 @@ git checkout -b $PREVIEW_BRANCH
 
 # this will change the apps to point to preview branch
 $SCRIPTDIR/update-app-revisions
+$SCRIPTDIR/update-sso.sh "$DOMAIN"
 
 if ! git diff --exit-code --quiet; then
     git commit -a -m "Preview mode, do not merge into main"
