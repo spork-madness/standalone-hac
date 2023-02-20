@@ -12,6 +12,6 @@ fi
 # update for clowder to ignore minikube 
 export KUBECTL_CMD=kubectl
 $SCRIPTDIR/install_clowder.sh  
-$SCRIPTDIR/install_hac.sh  
+$SCRIPTDIR/preview.sh  
 $SCRIPTDIR/install_proxy.sh  
    
