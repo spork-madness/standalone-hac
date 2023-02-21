@@ -3,7 +3,23 @@ set -o pipefail
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"  
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"/..
-    
+
+if [ -z "$SOUP_HOSTNAME" ]; then
+    echo "Warning SOUP_HOSTNAME is not set so will be computed if possible."
+    IS_CRC_DOMAIN=$(kubectl get ingresses.config.openshift.io cluster -o jsonpath={".spec.domain"})
+    if [ "$IS_CRC_DOMAIN" == "apps-crc.testing" ]; then
+        echo "On CRC this hostname can be set automatically. "
+        export SOUP_HOSTNAME="env-boot-local-127-0-0-1.nip.io"
+        echo "This install will be at https:/$SOUP_HOSTNAME/hac/stonesoup"  
+    else 
+        echo 
+        echo "You need to set SOUP_HOSTNAME to the target hostname for installing Stone Soup."
+        echo "export SOUP_HOSTNAME=<your hostname>"  
+        echo "This must be your clusters hostname that can be reached via a DNS lookup."
+        exit
+    fi  
+fi
+
 MY_GIT_FORK_REMOTE=origin 
 
 MY_GIT_REPO_URL=$(git ls-remote --get-url $MY_GIT_FORK_REMOTE | sed 's|^git@github.com:|https://github.com/|')
@@ -24,7 +40,7 @@ git checkout -b $PREVIEW_BRANCH
 
 # this will change the apps to point to preview branch
 $SCRIPTDIR/update-app-revisions
-$SCRIPTDIR/update-sso.sh "$DOMAIN"
+$SCRIPTDIR/update-sso.sh "$SOUP_HOSTNAME"
 
 if ! git diff --exit-code --quiet; then
     git commit -a -m "Preview mode, do not merge into main"
