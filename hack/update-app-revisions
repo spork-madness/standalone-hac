@@ -7,6 +7,8 @@ REMOTE=$(git remote show origin -n | grep Fetch)
 REMOTE_ARR=($REMOTE)
 REMOTE=${REMOTE_ARR[2]} 
 
+REMOTE=$(echo $REMOTE | sed 's|^git@github.com:|https://github.com/|')
+
 # update the targetRevision for the Argo Apps to match this branch
 REVISION=$(git rev-parse --abbrev-ref HEAD)
 
