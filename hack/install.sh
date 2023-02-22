@@ -20,7 +20,5 @@ kubectl delete deployment crc-k8s-proxy -n boot > /dev/null 2>&1
 export KUBECTL_CMD=kubectl
 $SCRIPTDIR/install_clowder.sh  
 $SCRIPTDIR/preview.sh  
-
-echo  
-echo "Find your soup at https:/$SOUP_HOSTNAME/hac/stonesoup"  
+ 
   
