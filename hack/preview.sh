@@ -7,18 +7,26 @@ ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"/..
 if [ -z "$SOUP_HOSTNAME" ]; then
     echo "Warning SOUP_HOSTNAME is not set so will be computed if possible."
     IS_CRC_DOMAIN=$(kubectl get ingresses.config.openshift.io cluster -o jsonpath={".spec.domain"})
-    if [ "$IS_CRC_DOMAIN" == "apps-crc.testing" ]; then
-        echo "On CRC this hostname can be set automatically. "
-        export SOUP_HOSTNAME="env-boot-local-127-0-0-1.nip.io"
-        echo "This install will be at https:/$SOUP_HOSTNAME/hac/stonesoup"  
+    if [ "$IS_CRC_DOMAIN" == "apps-crc.testing" ]; then 
+        export SOUP_HOSTNAME="env-boot-local-127-0-0-1.nip.io" 
+        echo "On CRC, trying https:/$SOUP_HOSTNAME/hac/stonesoup"  
     else 
-        echo 
-        echo "You need to set SOUP_HOSTNAME to the target hostname for installing Stone Soup."
-        echo "export SOUP_HOSTNAME=<your hostname>"  
-        echo "This must be your clusters hostname that can be reached via a DNS lookup."
+        export SOUP_HOSTNAME="hac.$IS_CRC_DOMAIN"  
+        echo "Setting the target hostname to $SOUP_HOSTNAME based on the cluster domain."
+        echo "If this name is not resolvable, you will need to set SOUP_HOSTNAME manually"
+        echo "export SOUP_HOSTNAME=<your hostname>"   
+        echo "Trying with $SOUP_HOSTNAME"
+    fi 
+    if nslookup  $SOUP_HOSTNAME  >/dev/null 2>&1; then
+        echo "OK: $SOUP_HOSTNAME succeeds nslookup, proceeding with install"
+    else 
+        echo "Error: $SOUP_HOSTNAME fails nslookup, exiting because this install will not succeed"
+        echo "If you want to uses this name regardless, run the following and re-run"
+        echo "export SOUP_HOSTNAME=$SOUP_HOSTNAME"   
         exit
-    fi  
-fi
+    fi
+fi    
+
 
 MY_GIT_FORK_REMOTE=origin 
 
