@@ -9,7 +9,7 @@ if [ -z "$SOUP_HOSTNAME" ]; then
     IS_CRC_DOMAIN=$(kubectl get ingresses.config.openshift.io cluster -o jsonpath={".spec.domain"})
     if [ "$IS_CRC_DOMAIN" == "apps-crc.testing" ]; then 
         export SOUP_HOSTNAME="env-boot-local-127-0-0-1.nip.io" 
-        echo "On CRC, trying https:/$SOUP_HOSTNAME/hac/stonesoup"  
+        echo "On CRC, trying https://$SOUP_HOSTNAME/hac/stonesoup"  
     else 
         export SOUP_HOSTNAME="hac.$IS_CRC_DOMAIN"  
         echo "Setting the target hostname to $SOUP_HOSTNAME based on the cluster domain."
