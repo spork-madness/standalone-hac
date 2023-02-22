@@ -82,6 +82,7 @@ while true; do
         break
     fi
 done 
+wait 
    
 echo  
 echo "Find your soup at https:/$SOUP_HOSTNAME/hac/stonesoup"  
