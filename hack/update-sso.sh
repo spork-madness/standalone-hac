@@ -14,7 +14,7 @@ SSO_HOST_KEYCLOAK=$( kubectl get routes keycloak -n dev-sso  -o jsonpath={".spec
 echo "HOSTNAME for AUTH is: $TARGET_HOSTNAME"
 echo "KEYCLOAK AUTH is: $SSO_HOST_KEYCLOAK" 
 
-cat << EOF > components/hac-boot/environment.yaml
+cat << EOF > $ROOT/components/hac-boot/environment.yaml
 apiVersion: cloud.redhat.com/v1alpha1
 kind: FrontendEnvironment
 metadata:
@@ -25,5 +25,7 @@ spec:
   ingressClass: openshift-default
   hostname: $TARGET_HOSTNAME
 EOF
+
+yq -i '.spec.rules[0].host="'$TARGET_HOSTNAME'"'  $ROOT/components/hac-boot/proxy-ingress.yaml
 
 echo "You need to commit this for it to take effect "
