@@ -6,8 +6,8 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   source:
-    repoURL: https://github.com/jduimovich/standalone-hac.git
-    targetRevision: main
+    repoURL: https://github.com/spork-madness/standalone-hac.git
+    targetRevision: preview-main
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -17,8 +17,8 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   source:
-    repoURL: https://github.com/jduimovich/standalone-hac.git
-    targetRevision: main
+    repoURL: https://github.com/spork-madness/standalone-hac.git
+    targetRevision: preview-main
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -28,8 +28,8 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   source:
-    repoURL: https://github.com/jduimovich/standalone-hac.git
-    targetRevision: main
+    repoURL: https://github.com/spork-madness/standalone-hac.git
+    targetRevision: preview-main
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -39,5 +39,5 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   source:
-    repoURL: https://github.com/jduimovich/standalone-hac.git
-    targetRevision: main
+    repoURL: https://github.com/spork-madness/standalone-hac.git
+    targetRevision: preview-main
