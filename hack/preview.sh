@@ -4,6 +4,13 @@ set -o pipefail
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"  
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"/..
 
+if [ "$(oc auth can-i '*' '*' --all-namespaces)" != "yes" ]; then
+  echo
+  echo "[ERROR] User '$(oc whoami)' does not have the required 'cluster-admin' role." 1>&2
+  echo "Log into the cluster with a user with the required privileges (e.g. kubeadmin) and retry."
+  exit 1
+fi
+
 if [ -z "$SOUP_HOSTNAME" ]; then
     echo "Warning SOUP_HOSTNAME is not set so will be computed if possible."
     IS_CRC_DOMAIN=$(kubectl get ingresses.config.openshift.io cluster -o jsonpath={".spec.domain"})
