@@ -9,6 +9,9 @@ You will need a standalone cluster (clusterbot or a large CRC) with kubeadmin
 
 * Pre-Install infra-deployments https://github.com/redhat-appstudio/infra-deployments and wait til completion
   * `./hack/bootstrap-cluster.sh preview --toolchain --keycloak`
+* Verify that the toolchain login is working. You need to login (see infra-deployments for pw). This will ensure the user tenant and workspace is configured for HAC. You can register at his endpoint. 
+ `echo "https://"$(kubectl get routes -n toolchain-host-operator registration-service -o jsonpath={.spec.host})`
+
 * Create a fork of this repo and clone it. This is required so that the scripts can customize the installation.
 * Set the SOUP_HOSTNAME variable for your cluster eg `export SOUP_HOSTNAME=cluster-hostname` This is required so that the routes to the hac frontends are based on the correct hostname.
 * Secrets and config - You will need to create a directory `hack/nocommit`  (copy `./hack/no-commit-templates`).
